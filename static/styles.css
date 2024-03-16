@@ -1,0 +1,16 @@
+body{
+    background: rgb(207, 217, 221);
+    
+}
+.main-container{
+    padding: 100px 0
+}
+.nav-bar{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size:17px
+}

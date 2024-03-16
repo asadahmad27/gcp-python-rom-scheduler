@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{{url_for('static',path='/styles.css')}}" rel="stylesheet" />
+    <script src="{{url_for('static',path='/firebase-login.js')}}" type="module"></script>
+    <style>
+        .auth_container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth_container div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-button,
+        .signup-button {
+            width: 95%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+
+        #signout {
+            color: #dc3545;
+            cursor: pointer
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <a href="/">Home</a>
+        <a href="/search-ev">Search</a>
+        <a href="/compare-ev-form">Compare</a>
+        <a href="add-ev">Add EV</a>
+        <a href="/login" id="login-on-nav">Login</a>
+        <a href="/login" id="signout-on-nav">Sign Out</a>
+    </div>
+    <div class="main-container">
+        <div class="auth_container">
+            <div id="login-box">
+                <div>
+                    <Label>Email</Label>
+
+                    <input name="email" type="email" id="email" />
+                </div>
+                <div>
+                    <Label>Password</Label>
+                    <input name="password" type="password" id="password" />
+                </div>
+                <div>
+                    <button id="login" style="margin-bottom: 20px;" class="login-button">Login</button>
+                    <button id="signup" class="signup-button">Signup</button>
+                </div>
+                <div id="error-box" style="color:red"></div>
+            </div>
+
+
+
+
+            <hr />
+            <button id="signout">Signout</button>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

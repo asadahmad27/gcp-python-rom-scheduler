@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="{{url_for('static',path='/styles.css')}}" rel="stylesheet" />
+    <script src="{{url_for('static',path='/firebase-login.js')}}" type="module"></script>
+
+    <style>
+        .table-container {
+            max-width: 80%;
+            margin: auto;
+            background-color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .form-container {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <a href="/">Home</a>
+        <a href="/login" id="login-on-nav">Login</a>
+        <a href="/login" id="signout-on-nav">Sign Out</a>
+    </div>
+    <div class="main-container">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+
+                        <th>Name</th>
+                        <th>Manufacturer</th>
+                        <th>Year</th>
+                        <th>Battery Size</th>
+                        <th>WLTP Range</th>
+                        <th>Cost</th>
+                        <th>Power</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in evs %}
+                    <tr>
+
+                        <td><a href="/view/{{doc.get('name')}}">{{ doc.get('name') }}</a></td>
+                        <td>{{ doc.get('manufacturer') }}</td>
+                        <td>{{ doc.get('year') }}</td>
+                        <td>{{ doc.get('battery_size') }}</td>
+                        <td>{{ doc.get('wltp_range') }}</td>
+                        <td>{{ doc.get('cost') }}</td>
+                        <td>{{ doc.get('power') }}</td>
+                        <td>
+                            <button onclick="location.href='/view/{{ doc.name }}'">View</button>
+                            <button onclick="location.href='/edit-ev/{{ doc.name }}'">Edit</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if error_info %}
+        <p>{{error_info}}</p>
+        {% endif %}
+
+        <div class="form-container">
+            <h2>Add New Room</h2>
+            <form action="/add-ev" method="post">
+                <label>Name:</label>
+                <input type="text" id="name" name="name" required>
+                <input type="submit" value="Add Room">
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

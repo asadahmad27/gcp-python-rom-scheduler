@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Info</title>
+    <link href="{{url_for('static',path='/styles.css')}}" rel="stylesheet" />
+    <script src="{{url_for('static',path='/firebase-login.js')}}" type="module"></script>
+    <style>
+        .container {
+            max-width: 80%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        h1,
+        p {
+            margin: 10px 0;
+
+        }
+
+        .info-p {
+            font-size: 25px
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            width: 200px
+        }
+
+        input {
+            padding: 8px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <a href="/">Home</a>
+        <a href="/search-ev">Search</a>
+        <a href="/compare-ev-form">Compare</a>
+        <a href="add-ev">Add EV</a>
+        <a href="/login" id="login-on-nav">Login</a>
+        <a href="/login" id="signout-on-nav">Sign Out</a>
+    </div>
+    <div class="main-container">
+        <div class="container">
+            <h1>EV Information</h1>
+            <p class="info-p"><strong>Name:</strong> {{ ev.name }}</p>
+            <p class="info-p"><strong>Manufacturer:</strong> {{ ev.manufacturer }}</p>
+            <p class="info-p"><strong>Year:</strong> {{ ev.year }}</p>
+            <p class="info-p"><strong>Battery Size:</strong> {{ ev.battery_size }} kWh</p>
+            <p class="info-p"><strong>WLTP Range:</strong> {{ ev.wltp_range }} km</p>
+            <p class="info-p"><strong>Cost:</strong> {{ ev.cost }}</p>
+            <p class="info-p"><strong>Power:</strong> {{ ev.power }} kW</p>
+
+
+            <a class="delete-button" href="/delete-ev/{{ev.name}}">Delete</a>
+            <h3>Average Rating: </h3>
+            <p>{{ average_rating}}</p>
+            <div>
+                <h2><u>Reviews</u></h2>
+                {% for review in reviews %}
+                <div class="review">
+                    <p><strong>Rating:</strong> {{ review.rating }}/10</p>
+                    <p>{{ review.review }}</p>
+                    <p>{{ review.submitted_at }}</p>
+                    <hr />
+                </div>
+                {% endfor %}
+            </div>
+            <h2>Submit Review</h2>
+            <form action="/submit-review/{{ev.name}}" method="post">
+                <label>Review (up to 1,000 characters):</label>
+                <textarea id="review" name="review" maxlength="1000" required rows="20" cols="50"></textarea>
+
+                <label>Rating (0 to 10):</label>
+                <input type="number" id="rating" name="rating" min="0" max="10" required>
+
+                <input type="submit" value="Submit Review">
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

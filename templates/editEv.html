@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit EV</title>
+    <link href="{{url_for('static',path='/styles.css')}}" rel="stylesheet" />
+    <script src="{{url_for('static',path='/firebase-login.js')}}" type="module"></script>
+    <style>
+        .form-container {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <a href="/">Home</a>
+        <a href="/search-ev">Search</a>
+        <a href="/compare-ev-form">Compare</a>
+        <a href="add-ev">Add EV</a>
+        <a href="/login" id="login-on-nav">Login</a>
+        <a href="/login" id="signout-on-nav">Sign Out</a>
+    </div>
+    <div class="main-container">
+        <div class="form-container">
+            <h2>Edit EV</h2>
+            <form action="/update-ev/{{ ev.name }}" method="post">
+                <label>Name:</label>
+                <input type="text" id="name" name="name" value="{{ ev.name }}" required>
+
+                <label>Manufacturer:</label>
+                <input type="text" id="manufacturer" name="manufacturer" value="{{ ev.manufacturer }}" required>
+
+                <label>Year:</label>
+                <input type="number" id="year" name="year" value="{{ ev.year }}" required>
+
+                <label>Battery Size (KWh):</label>
+                <input type="number" id="battery_size" name="battery_size" value="{{ ev.battery_size }}" required>
+
+                <label>WLTP Range (Km):</label>
+                <input type="number" id="wltp_range" name="wltp_range" value="{{ ev.wltp_range }}" required>
+
+                <label>Cost:</label>
+                <input type="number" id="cost" name="cost" value="{{ ev.cost }}" required>
+
+                <label>Power (Kw):</label>
+                <input type="number" id="power" name="power" value="{{ ev.power }}" required>
+
+                <input type="submit" value="Update">
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>
